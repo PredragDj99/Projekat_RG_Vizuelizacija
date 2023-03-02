@@ -1,0 +1,45 @@
+﻿<Window x:Class="Vizuelizacija.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Vizuelizacija"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="750" Width="750">
+    <DockPanel MouseRightButtonDown="Right_ClickBiloGde" MouseLeftButtonUp="LeviPoligon_Click">
+        <Menu x:Name="menu" Height="25" DockPanel.Dock="Top">
+            <MenuItem Header="Load" FontSize="15" Click="Load_Click"/>
+            <MenuItem Header="Edit" FontSize="15">
+                <MenuItem Header="Undo" Click="Undo_Click" />
+                <MenuItem Header="Redo" Click="Redo_Click" />
+                <MenuItem Header="Clear" Click="Clear_Click" />
+            </MenuItem>
+            <MenuItem Header="Dodaj na graf" FontSize="15">
+                <MenuItem x:Name="EllipseChecked" Header="Draw Ellipse" IsCheckable="True"/>
+                <MenuItem x:Name="PolygonChecked" Header="Draw Polygon" IsCheckable="True"/>
+                <MenuItem x:Name="TextChecked" Header="Add Text" IsCheckable="True" />
+            </MenuItem>
+            <MenuItem Header="Vizuelizacija" FontSize="15">
+                <MenuItem x:Name="aktivanDeoMrezeChecked" Header="Sakrij/prikazi aktivan deo mreze" IsCheckable="True" Click="AktivanDeoMreze_Click" />
+                <MenuItem x:Name="crtanjeEntitetaChecked" Header="Oboj entitete razlicitim intenzitetom" >
+                    <MenuItem x:Name="konekcija03" Header="Broj konekcija 0-3" IsCheckable="True" Click="Konekcija03_Click"/>
+                    <MenuItem x:Name="konekcija35" Header="Broj konekcija 3-5" IsCheckable="True" Click="Konekcija35_Click"/>
+                    <MenuItem x:Name="konekcija5" Header="Broj konekcija 5+" IsCheckable="True" Click="Konekcija5_Click"/>
+                </MenuItem>
+                <MenuItem x:Name="bojenjeVodova" Header="Oboj vodove spram materijala" IsCheckable="True" Click="BojenjeVodova_Click" />
+                <MenuItem x:Name="promeniBojuVodova" Header="Promeni boju vodova na osnovu otvornosti" IsCheckable="True" Click="PromeniBojuVodovaOtpornost_Click" />
+                <MenuItem x:Name="bojaEntitetaSlika" Header="Promeni boju entiteta - postavi sliku" IsCheckable="True" Click="PromeniBojuEntitetaSlika_Click"/>
+                <MenuItem x:Name="saveAsPicture" Header="Sacuvaj kao sliku" Click="SacuvajKaoSliku_Click" />
+            </MenuItem>
+        </Menu>
+        <Slider x:Name="slider" Minimum="0.3" Maximum="30" Value="1" DockPanel.Dock="Top"/>
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Canvas x:Name="canvas" DockPanel.Dock="Bottom" Height="900" Width="905" Focusable="True" MouseLeftButtonDown="LeviPromeniNesto_Click" >
+                <Canvas.LayoutTransform>
+                    <ScaleTransform x:Name="SkaliranjeTransform" ScaleX="{Binding ElementName=slider, Path=Value}"
+                                ScaleY="{Binding ElementName=slider, Path=Value}"/>
+                </Canvas.LayoutTransform>
+            </Canvas>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
